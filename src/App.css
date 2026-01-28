@@ -1,0 +1,177 @@
+body {
+  font-family: 'Lora', serif;
+  background-color: white;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  line-height: 1.4;
+  overscroll-behavior-y: contain;
+}
+
+.container {
+  padding: 2rem 2rem 2rem 0;
+}
+
+.sidebar {
+  position: fixed;
+  left: 2rem;
+  top: 2rem;
+  height: calc(100vh - 4rem);
+  width: 200px;
+  padding-left: 1rem;
+  padding-right: 2rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.main-content {
+  margin-left: 207px;
+  padding-left: 2rem;
+}
+
+.content-wrapper {
+  max-width: 60%;
+  margin: 0 auto;
+}
+
+.navigation, .social-links {
+  margin-bottom: 1.5rem;
+}
+
+.section-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #666;
+  margin-bottom: 1rem;
+  letter-spacing: 0.1em;
+}
+
+.sidebar a {
+  display: block;
+  color: #333;
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: normal;
+}
+
+.sidebar a:hover {
+  color: #666;
+}
+
+.sidebar a.active {
+  color: #000;
+}
+
+.main-content {
+  flex: 1;
+  padding-left: 2rem;
+}
+
+header h1 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  color: #000;
+}
+
+section {
+  margin-bottom: 2rem;
+}
+
+section h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #000;
+}
+
+section p {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+ul {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+a {
+  color: #6b8e23; /* muted blue */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 1280px) {
+  .container {
+    padding: 2rem 8rem 2rem 0;
+  }
+  .content-wrapper {
+    max-width: 80%;
+  }
+  .sidebar a {
+    font-size: 1.4rem;
+  }
+}
+
+.books-list {
+  margin-top: 2rem;
+}
+
+.book-item {
+  display: flex;
+  margin-bottom: 2rem;
+  align-items: flex-start;
+}
+
+.book-link {
+  display: block;
+  margin-right: 1rem;
+}
+
+.book-image {
+  width: 150px;
+  height: auto;
+  transition: filter 0.3s ease;
+}
+
+.book-summary {
+  flex: 1;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.projects-list {
+  margin-top: 2rem;
+}
+
+.project-item {
+  margin-bottom: 2rem;
+}
+
+.project-item h2 {
+  font-size: 1.5rem;
+}
+
+.project-item h2 a {
+  color: #0066cc;
+  text-decoration: underline;
+}
+
+.project-item h2 a:hover {
+  color: #004499;
+}
+
+.project-item p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
