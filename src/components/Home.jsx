@@ -6,7 +6,7 @@ function Home() {
     <main className="main-content">
       <div className="content-wrapper">
         <article className="css-18fqvvy">
-          <h1>Niraj Naphade</h1>
+          <h1>Neeraj Naphade</h1>
           <p><strong>Some things about me:</strong></p>
           <p>I'm an engineer with a strong interest in software systems, machine learning, and security, and I enjoy working at the intersection of theory and real-world applications.</p>
           <p>Over the years, I've explored and built with technologies like React, Flutter, data analysis pipelines, and machine learning workflows, while continuously sharpening my fundamentals in computer science and problem-solving.</p>

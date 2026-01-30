@@ -25,7 +25,7 @@ function Reading() {
             </div>
             <div className="book-item">
               <a href="https://www.amazon.com/Emotional-Intelligence-Matter-More-Than/dp/055338371X" className="book-link" target="_blank" rel="noopener noreferrer">
-                <img src="https://m.media-amazon.com/images/I/71TGnFC-5yL._UF1000,1000_QL80_.jpg" className="book-image" />
+                <img src="https://m.media-amazon.com/images/I/71TGnFC-5yL._UF1000,1000_QL80_.jpg" alt="Emotional Intelligence" className="book-image" />
               </a>
               <div className="book-summary">Daniel Goleman's classic on emotional intelligence was a game-changer for me. He argues that EQ is often more important than IQ for success in life and work. The book dives into self-awareness, self-regulation, motivation, empathy, and social skills, backed by research and real-world examples. I appreciated how it made me reflect on my own emotional responses and interactions with others. It's not just theory—it's packed with practical advice for developing these skills, making it essential for personal and professional growth in today's interconnected world.</div>
             </div>
