@@ -1,14 +1,12 @@
-import { NavLink } from 'react-router-dom'
 import { useState } from 'react'
 
-function DockNavigation() {
+function SocialDock() {
   const [hoveredIndex, setHoveredIndex] = useState(null)
 
-  const navItems = [
-    { to: '/home', label: 'Home' },
-    { to: '/reading', label: 'Reading' },
-    { to: '/writing', label: 'Projects' },
-    { to: '/deep-dives', label: 'Deep Diving' },
+  const socialItems = [
+    { href: 'https://x.com/NeerajNaphade', label: 'Twitter' },
+    { href: 'https://www.linkedin.com/in/neeraj-naphade/', label: 'LinkedIn' },
+    { href: 'https://github.com/knokvik', label: 'GitHub' },
   ]
 
   const getScale = (index) => {
@@ -21,13 +19,16 @@ function DockNavigation() {
   }
 
   return (
-    <nav className="navigation">
-      <div className="section-label">Navigation</div>
+    <div className="social-links">
+      <div className="section-label">Connect</div>
+
       <div className="dock-container">
-        {navItems.map((item, index) => (
-          <NavLink
-            key={item.to}
-            to={item.to}
+        {socialItems.map((item, index) => (
+          <a
+            key={item.label}
+            href={item.href}
+            target="_blank"
+            rel="noreferrer"
             className="dock-link"
             style={{
               transform: `scale(${getScale(index)})`,
@@ -36,12 +37,11 @@ function DockNavigation() {
             onMouseLeave={() => setHoveredIndex(null)}
           >
             {item.label}
-          </NavLink>
+          </a>
         ))}
       </div>
-    </nav>
+    </div>
   )
 }
 
-export default DockNavigation
-
+export default SocialDock

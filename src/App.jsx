@@ -6,6 +6,7 @@ import Writing from './components/Writing'
 import DeepDiving from './components/DeepDiving'
 import PageLoader from './components/PageLoader'
 import DockNavigation from './components/DockNavigation'
+import SocialDock from './components/SocialNavigation'
 import './App.css'
 
 function App() {
@@ -14,15 +15,10 @@ function App() {
   return (
     <Router>
       {isLoading && <PageLoader onComplete={() => setIsLoading(false)} />}
-      <div className={`container ${isLoading ? 'loading' : ''}`}>
+      <div className="container">
         <aside className="sidebar">
           <DockNavigation />
-          <div className="social-links">
-            <div className="section-label">Connect</div>
-            <a href="https://x.com/NeerajNaphade">Twitter</a>
-            <a href="https://www.linkedin.com/in/neeraj-naphade/">LinkedIn</a>
-            <a href="https://github.com/knokvik">GitHub</a>
-          </div>
+          <SocialDock/>
         </aside>
         <Routes>
           <Route path="/home" element={<Home />} />

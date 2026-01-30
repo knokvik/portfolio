@@ -3,44 +3,44 @@ import './PageLoader.css'
 
 function PageLoader({ onComplete }) {
   const [progress, setProgress] = useState(0)
-  const [isVisible, setIsVisible] = useState(true)
+  const [slideUp, setSlideUp] = useState(false)
 
   useEffect(() => {
     const duration = 2000
-    const startTime = Date.now()
-    
-    const animate = () => {
-      const elapsed = Date.now() - startTime
-      const rawProgress = (elapsed / duration) * 100
-      
-      const easedProgress = rawProgress < 50
-        ? 2 * rawProgress * rawProgress / 100
-        : 100 - 2 * (100 - rawProgress) * (100 - rawProgress) / 100
-      
-      setProgress(easedProgress)
-      
+    const start = Date.now()
+
+    const tick = () => {
+      const elapsed = Date.now() - start
+      const value = Math.min((elapsed / duration) * 100, 100)
+
+      setProgress(value)
+
       if (elapsed < duration) {
-        requestAnimationFrame(animate)
+        requestAnimationFrame(tick)
       } else {
-        setProgress(100)
+        // WAIT → then slide
         setTimeout(() => {
-          setIsVisible(false)
-          setTimeout(() => onComplete?.(), 500)
-        }, 300)
+          setSlideUp(true)
+
+          // WAIT FOR SLIDE ANIMATION TO FINISH
+          setTimeout(() => {
+            onComplete?.()
+          }, 700)
+        }, 200) 
       }
     }
-    
-    requestAnimationFrame(animate)
+
+    requestAnimationFrame(tick)
   }, [onComplete])
 
   return (
-    <div className={`page-loader ${!isVisible ? 'hidden' : ''}`}>
+    <div className={`page-loader ${slideUp ? 'slide-up' : ''}`}>
       <div className="loader-content">
-        <div className="percentage">{Math.min(Math.floor(progress), 100)}%</div>
+        <div className="percentage">{Math.floor(progress)}%</div>
         <div className="progress-bar">
-          <div 
-            className="progress-fill" 
-            style={{ width: `${Math.min(progress, 100)}%` }}
+          <div
+            className="progress-fill"
+            style={{ width: `${progress}%` }}
           />
         </div>
       </div>
