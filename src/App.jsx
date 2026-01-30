@@ -1,22 +1,22 @@
-import { HashRouter as Router, Routes, Route, NavLink } from 'react-router-dom'
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'
+import { useState } from 'react'
 import Home from './components/Home'
 import Reading from './components/Reading'
 import Writing from './components/Writing'
 import DeepDiving from './components/DeepDiving'
+import PageLoader from './components/PageLoader'
+import DockNavigation from './components/DockNavigation'
 import './App.css'
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true)
+
   return (
     <Router>
-      <div className="container">
+      {isLoading && <PageLoader onComplete={() => setIsLoading(false)} />}
+      <div className={`container ${isLoading ? 'loading' : ''}`}>
         <aside className="sidebar">
-          <nav className="navigation">
-            <div className="section-label">Navigation</div>
-            <NavLink to="/home">Home</NavLink>
-            <NavLink to="/reading">Reading</NavLink>
-            <NavLink to="/writing">Projects</NavLink>
-            <NavLink to="/deep-dives">Deep Diving</NavLink>
-          </nav>
+          <DockNavigation />
           <div className="social-links">
             <div className="section-label">Connect</div>
             <a href="https://x.com/NeerajNaphade">Twitter</a>
