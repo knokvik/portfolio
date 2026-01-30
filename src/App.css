@@ -10,6 +10,11 @@ body {
 
 .container {
   padding: 2rem 2rem 2rem 0;
+  transition: opacity 0.6s ease-in-out 0.3s;
+}
+
+.container.loading {
+  opacity: 0;
 }
 
 .sidebar {
@@ -40,6 +45,36 @@ body {
   margin-bottom: 1.5rem;
 }
 
+.dock-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.dock-link {
+  display: block;
+  color: #333;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: normal;
+  transition: transform 0.2s ease, color 0.2s ease;
+  transform-origin: center left;
+  padding: 0.2rem 0;
+  cursor: pointer;
+}
+
+.dock-link:hover {
+  color: #666;
+}
+
+.dock-link.active {
+  color: #000;
+}
+
+.container.loading {
+  opacity: 0;
+}
+
 .section-label {
   font-size: 0.8rem;
   text-transform: uppercase;
@@ -48,7 +83,7 @@ body {
   letter-spacing: 0.1em;
 }
 
-.sidebar a {
+.sidebar a:not(.dock-link) {
   display: block;
   color: #333;
   text-decoration: none;
@@ -57,12 +92,8 @@ body {
   font-weight: normal;
 }
 
-.sidebar a:hover {
+.sidebar a:not(.dock-link):hover {
   color: #666;
-}
-
-.sidebar a.active {
-  color: #000;
 }
 
 .main-content {
@@ -118,7 +149,10 @@ a:hover {
   .content-wrapper {
     max-width: 80%;
   }
-  .sidebar a {
+  .sidebar a:not(.dock-link) {
+    font-size: 1.4rem;
+  }
+  .dock-link {
     font-size: 1.4rem;
   }
 }
