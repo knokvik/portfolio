@@ -3,9 +3,14 @@ import '../App.css'
 
 function Writing() {
   const [loadedImages, setLoadedImages] = useState({})
+  const [errorImages, setErrorImages] = useState({})
 
   const handleImageLoad = (index) => {
     setLoadedImages(prev => ({ ...prev, [index]: true }))
+  }
+
+  const handleImageError = (index) => {
+    setErrorImages(prev => ({ ...prev, [index]: true }))
   }
 
   const projects = [
@@ -51,16 +56,24 @@ function Writing() {
               <div className="project-item" key={index}>
                 <h2><a href={project.url} target="_blank" rel="noopener noreferrer">{project.title}</a></h2>
                 <div className='project-card'>
-                  {!loadedImages[index] && (
+                  {!loadedImages[index] && !errorImages[index] && (
                     <div className="project-image-skeleton"></div>
                   )}
-                  <img
-                    src={project.image}
-                    alt={`${project.title} preview`}
-                    className={loadedImages[index] ? 'loaded' : 'loading'}
-                    onLoad={() => handleImageLoad(index)}
-                    style={{ display: loadedImages[index] ? 'block' : 'none' }}
-                  />
+                  {errorImages[index] ? (
+                    <div className="project-image-error">
+                      <span>🚀</span>
+                      <p>Preview unavailable</p>
+                    </div>
+                  ) : (
+                    <img
+                      src={project.image}
+                      alt={`${project.title} preview`}
+                      className={loadedImages[index] ? 'loaded' : 'loading'}
+                      onLoad={() => handleImageLoad(index)}
+                      onError={() => handleImageError(index)}
+                      style={{ display: loadedImages[index] ? 'block' : 'none' }}
+                    />
+                  )}
                 </div>
               </div>
             ))}

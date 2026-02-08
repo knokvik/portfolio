@@ -2,9 +2,14 @@ import { useState } from 'react'
 
 function Reading() {
   const [loadedImages, setLoadedImages] = useState({})
+  const [errorImages, setErrorImages] = useState({})
 
   const handleImageLoad = (index) => {
     setLoadedImages(prev => ({ ...prev, [index]: true }))
+  }
+
+  const handleImageError = (index) => {
+    setErrorImages(prev => ({ ...prev, [index]: true }))
   }
 
   const books = [
@@ -49,16 +54,24 @@ function Reading() {
             {books.map((book, index) => (
               <div className="book-item" key={index}>
                 <a href={book.url} className="book-link" target="_blank" rel="noopener noreferrer">
-                  {!loadedImages[index] && (
+                  {!loadedImages[index] && !errorImages[index] && (
                     <div className="book-image-skeleton"></div>
                   )}
-                  <img
-                    src={book.image}
-                    alt={book.alt}
-                    className={`book-image ${loadedImages[index] ? 'loaded' : 'loading'}`}
-                    onLoad={() => handleImageLoad(index)}
-                    style={{ display: loadedImages[index] ? 'block' : 'none' }}
-                  />
+                  {errorImages[index] ? (
+                    <div className="book-image-error">
+                      <span>📚</span>
+                      <p>Image unavailable</p>
+                    </div>
+                  ) : (
+                    <img
+                      src={book.image}
+                      alt={book.alt}
+                      className={`book-image ${loadedImages[index] ? 'loaded' : 'loading'}`}
+                      onLoad={() => handleImageLoad(index)}
+                      onError={() => handleImageError(index)}
+                      style={{ display: loadedImages[index] ? 'block' : 'none' }}
+                    />
+                  )}
                 </a>
                 <div className="book-summary">{book.summary}</div>
               </div>
