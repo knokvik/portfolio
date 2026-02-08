@@ -6,31 +6,75 @@ function PageLoader({ onComplete }) {
   const [slideUp, setSlideUp] = useState(false)
 
   useEffect(() => {
-    const duration = 2000
-    const start = Date.now()
+    let animationFrame
+    let startTime = Date.now()
 
-    const tick = () => {
-      const elapsed = Date.now() - start
-      const value = Math.min((elapsed / duration) * 100, 100)
-
-      setProgress(value)
-
-      if (elapsed < duration) {
-        requestAnimationFrame(tick)
+    // Track document ready state
+    const checkReadyState = () => {
+      const state = document.readyState
+      if (state === 'loading') {
+        return 30
+      } else if (state === 'interactive') {
+        return 60
       } else {
-        // WAIT → then slide
-        setTimeout(() => {
-          setSlideUp(true)
-
-          // WAIT FOR SLIDE ANIMATION TO FINISH
-          setTimeout(() => {
-            onComplete?.()
-          }, 700)
-        }, 200) 
+        return 90
       }
     }
 
-    requestAnimationFrame(tick)
+    // Smooth progress animation
+    const animateProgress = () => {
+      const elapsed = Date.now() - startTime
+      const targetProgress = checkReadyState()
+
+      setProgress(prev => {
+        const diff = targetProgress - prev
+        const increment = diff * 0.1 // Smooth easing
+        return Math.min(prev + increment, targetProgress)
+      })
+
+      if (document.readyState !== 'complete') {
+        animationFrame = requestAnimationFrame(animateProgress)
+      }
+    }
+
+    // Start animation
+    animationFrame = requestAnimationFrame(animateProgress)
+
+    // Listen for load complete
+    const handleLoad = () => {
+      // Animate to 100%
+      const finalAnimation = () => {
+        setProgress(prev => {
+          if (prev < 100) {
+            const increment = (100 - prev) * 0.2
+            requestAnimationFrame(finalAnimation)
+            return prev + increment
+          }
+          return 100
+        })
+      }
+      finalAnimation()
+
+      // Wait a bit then slide up
+      setTimeout(() => {
+        setSlideUp(true)
+        setTimeout(() => {
+          onComplete?.()
+        }, 700)
+      }, 500)
+    }
+
+    // If already loaded, complete immediately
+    if (document.readyState === 'complete') {
+      handleLoad()
+    } else {
+      window.addEventListener('load', handleLoad)
+    }
+
+    return () => {
+      cancelAnimationFrame(animationFrame)
+      window.removeEventListener('load', handleLoad)
+    }
   }, [onComplete])
 
   return (
@@ -49,3 +93,4 @@ function PageLoader({ onComplete }) {
 }
 
 export default PageLoader
+
