@@ -1,48 +1,69 @@
+import { useState } from 'react'
 import '../App.css'
 
 function Writing() {
+  const [loadedImages, setLoadedImages] = useState({})
+
+  const handleImageLoad = (index) => {
+    setLoadedImages(prev => ({ ...prev, [index]: true }))
+  }
+
+  const projects = [
+    {
+      title: "Inveto",
+      url: "https://github.com/knokvik/Inveto",
+      image: "https://opengraph.githubassets.com/1/knokvik/Inveto"
+    },
+    {
+      title: "TypeRush",
+      url: "https://github.com/knokvik/TypeRush",
+      image: "https://opengraph.githubassets.com/1/knokvik/TypeRush"
+    },
+    {
+      title: "PetTrove",
+      url: "https://github.com/knokvik/PetTrove",
+      image: "https://opengraph.githubassets.com/1/knokvik/PetTrove"
+    },
+    {
+      title: "Dragonball",
+      url: "https://github.com/knokvik/dragonball",
+      image: "https://opengraph.githubassets.com/1/knokvik/dragonball"
+    },
+    {
+      title: "Echo",
+      url: "https://github.com/knokvik/echo",
+      image: "https://opengraph.githubassets.com/1/knokvik/echo"
+    },
+    {
+      title: "Monster",
+      url: "https://github.com/knokvik/monster",
+      image: "https://opengraph.githubassets.com/1/knokvik/monster"
+    }
+  ]
+
   return (
     <main className="main-content">
       <div className="content-wrapper">
         <article>
           <h1>Projects</h1>
           <div className="projects-list">
-            <div className="project-item">
-              <h2><a href="https://github.com/knokvik/Inveto" target="_blank" rel="noopener noreferrer"> Inveto</a></h2>
-              <div className='project-card'>
-                <img src="https://opengraph.githubassets.com/1/knokvik/Inveto" className=""/>
+            {projects.map((project, index) => (
+              <div className="project-item" key={index}>
+                <h2><a href={project.url} target="_blank" rel="noopener noreferrer">{project.title}</a></h2>
+                <div className='project-card'>
+                  {!loadedImages[index] && (
+                    <div className="project-image-skeleton"></div>
+                  )}
+                  <img
+                    src={project.image}
+                    alt={`${project.title} preview`}
+                    className={loadedImages[index] ? 'loaded' : 'loading'}
+                    onLoad={() => handleImageLoad(index)}
+                    style={{ display: loadedImages[index] ? 'block' : 'none' }}
+                  />
+                </div>
               </div>
-            </div>
-            <div className="project-item">
-              <h2><a href="https://github.com/knokvik/TypeRush" target="_blank" rel="noopener noreferrer">TypeRush</a></h2>
-              <div className='project-card'>
-                <img src="https://opengraph.githubassets.com/1/knokvik/TypeRush" className=""/>
-            </div>
-            </div>
-            <div className="project-item">
-              <h2><a href="https://github.com/knokvik/PetTrove" target="_blank" rel="noopener noreferrer">PetTrove</a></h2>
-              <div className='project-card'>
-                <img src="https://opengraph.githubassets.com/1/knokvik/PetTrove" className=""/>
-            </div>
-            </div>
-            <div className="project-item">
-              <h2><a href="https://github.com/knokvik/dragonball" target="_blank" rel="noopener noreferrer">Dragonball</a></h2>
-              <div className='project-card'>
-                <img src="https://opengraph.githubassets.com/1/knokvik/dragonball" className=""/>
-            </div>
-            </div>
-            <div className="project-item">
-              <h2><a href="https://github.com/knokvik/echo" target="_blank" rel="noopener noreferrer">Echo</a></h2>
-              <div className='project-card'>
-                <img src="https://opengraph.githubassets.com/1/knokvik/echo" className=""/>
-            </div>
-            </div>
-            <div className="project-item">
-              <h2><a href="https://github.com/knokvik/monster" target="_blank" rel="noopener noreferrer">Monster</a></h2>
-              <div className='project-card'>
-                <img src="https://opengraph.githubassets.com/1/knokvik/monster" className=""/>
-            </div>
-            </div>
+            ))}
           </div>
         </article>
       </div>
