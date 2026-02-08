@@ -377,7 +377,17 @@ a:hover {
     width: 120px;
   }
 
+  .book-image-skeleton {
+    width: 120px;
+    height: 180px;
+  }
+
   .project-item img {
+    height: auto;
+    min-height: 12rem;
+  }
+
+  .project-image-skeleton {
     height: auto;
     min-height: 12rem;
   }
@@ -429,11 +439,21 @@ a:hover {
     width: 100px;
   }
 
+  .book-image-skeleton {
+    width: 100px;
+    height: 150px;
+  }
+
   .project-item h2 {
     font-size: 1.3rem;
   }
 
   .project-item img {
+    height: auto;
+    min-height: 10rem;
+  }
+
+  .project-image-skeleton {
     height: auto;
     min-height: 10rem;
   }
